@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // 1. Import Link
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,13 +13,10 @@ const Login = () => {
         setError(''); 
         
         try {
-            // UPDATED: Added /api/auth/login to hit the correct backend route
             const res = await axios.post('https://comrade-wallet-api.onrender.com/api/auth/login', { 
                 email, 
                 password 
             });
-            
-            console.log("Login successful!", res.data);
             
             localStorage.setItem('token', res.data.token);
             if (res.data.user) {
@@ -68,11 +65,14 @@ const Login = () => {
                 </form>
                 
                 <p style={{ marginTop: '20px', fontSize: '14px', color: '#555' }}>
-                    Don't have an account? <span 
-                        onClick={() => navigate('/register')} 
-                        style={{ color: '#005a32', cursor: 'pointer', fontWeight: 'bold' }}>
+                    Don't have an account?{' '}
+                    {/* 2. Use the Link component here */}
+                    <Link 
+                        to="/register" 
+                        style={{ color: '#005a32', textDecoration: 'none', fontWeight: 'bold' }}
+                    >
                         Register here
-                    </span>
+                    </Link>
                 </p>
             </div>
         </div>
