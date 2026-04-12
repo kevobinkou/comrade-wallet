@@ -16,9 +16,11 @@ function App() {
           {/* Protected Dashboard page */}
           <Route path="/dashboard" element={<Dashboard />} />
           
-          {/* If the URL doesn't match anything, go to Login */}
-          <Route path="*" element={<Navigate to="/login" />} />
+          {/* Default Route */}
           <Route path="/" element={<Navigate to="/login" />} />
+
+          {/* Fallback for any undefined URL */}
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </div>
     </Router>
