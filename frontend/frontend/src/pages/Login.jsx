@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom'; // 1. Import Link
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -66,10 +66,10 @@ const Login = () => {
                 
                 <p style={{ marginTop: '20px', fontSize: '14px', color: '#555' }}>
                     Don't have an account?{' '}
-                    {/* 2. Use the Link component here */}
                     <Link 
+                        id="nav-to-register-v2"
                         to="/register" 
-                        style={{ color: '#005a32', textDecoration: 'none', fontWeight: 'bold' }}
+                        style={{ color: '#005a32', textDecoration: 'none', fontWeight: 'bold', display: 'inline-block' }}
                     >
                         Register here
                     </Link>
