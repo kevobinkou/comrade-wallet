@@ -14,7 +14,7 @@ const Login = () => {
         
         try {
             // Sends request to your backend Auth route
-            const res = await axios.post('http://localhost:5000/api/auth/login', { 
+            const res = await axios.post('https://comrade-wallet-api.onrender.com', { 
                 email, 
                 password 
             });

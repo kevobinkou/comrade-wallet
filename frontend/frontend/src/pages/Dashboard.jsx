@@ -12,6 +12,9 @@ const Dashboard = () => {
     const [username, setUsername] = useState('');
     const navigate = useNavigate();
 
+    // Your Live Render API URL
+    const API_BASE_URL = "https://comrade-wallet-api.onrender.com/api/transactions";
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         const storedName = localStorage.getItem('username');
@@ -24,9 +27,14 @@ const Dashboard = () => {
     }, [navigate]);
 
     const fetchData = async () => {
+        const token = localStorage.getItem('token');
         try {
-            const summaryRes = await axios.get('http://localhost:5000/api/transactions/summary');
-            const historyRes = await axios.get('http://localhost:5000/api/transactions/all');
+            // Added Authorization header so the backend knows who you are
+            const config = { headers: { Authorization: `Bearer ${token}` } };
+            
+            const summaryRes = await axios.get(`${API_BASE_URL}/summary`, config);
+            const historyRes = await axios.get(`${API_BASE_URL}/all`, config);
+            
             setSummary(summaryRes.data);
             setTransactions(historyRes.data);
         } catch (err) {
@@ -36,13 +44,17 @@ const Dashboard = () => {
 
     const handleAddTransaction = async (e) => {
         e.preventDefault(); 
+        const token = localStorage.getItem('token');
         try {
-            await axios.post('http://localhost:5000/api/transactions/add', {
+            const config = { headers: { Authorization: `Bearer ${token}` } };
+            
+            await axios.post(`${API_BASE_URL}/add`, {
                 title, 
                 amount: Number(amount), 
                 type, 
                 category: "General" 
-            });
+            }, config);
+            
             await fetchData(); 
             setTitle('');
             setAmount('');
@@ -55,8 +67,10 @@ const Dashboard = () => {
 
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this transaction?")) {
+            const token = localStorage.getItem('token');
             try {
-                await axios.delete(`http://localhost:5000/api/transactions/${id}`);
+                const config = { headers: { Authorization: `Bearer ${token}` } };
+                await axios.delete(`${API_BASE_URL}/${id}`, config);
                 fetchData();
             } catch (err) {
                 console.error("Delete failed:", err);
