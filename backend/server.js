@@ -2,16 +2,22 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const transactionRoutes = require('./routes/transactions');
-const authRoutes = require('./routes/auth'); // Moved import to the top
+const authRoutes = require('./routes/auth'); 
 require('dotenv').config();
 
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors()); // In production, you can use: app.use(cors({ origin: 'https://comrade-wallet-app.vercel.app' }));
 
-// Routes: Define these BEFORE app.listen
+// FIXED CORS: Explicitly allow your Vercel frontend
+app.use(cors({
+    origin: 'https://comrade-wallet-app.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
+// Routes
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/auth', authRoutes);
 
