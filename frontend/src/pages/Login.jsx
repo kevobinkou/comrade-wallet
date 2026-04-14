@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -64,27 +64,21 @@ const Login = () => {
                     </button>
                 </form>
                 
-                <p style={{ marginTop: '20px', fontSize: '14px', color: '#555' }}>
+                <p style={{ marginTop: '25px', fontSize: '14px', color: '#555' }}>
                     Don't have an account?{' '}
-                    <Link 
-                        id="nav-to-register-v2"
-                        to="/register" 
-                        onClick={(e) => {
-                            // Backup: if Link fails, force location change
-                            if (!e.defaultPrevented) window.location.href = '/register';
-                        }}
+                    <span 
+                        onClick={() => navigate('/register')}
                         style={{ 
                             color: '#005a32', 
-                            textDecoration: 'none', 
+                            textDecoration: 'underline', 
                             fontWeight: 'bold', 
-                            display: 'inline-block',
-                            position: 'relative',
-                            zIndex: 100,
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            padding: '10px 5px', // Larger hit area
+                            display: 'inline-block'
                         }}
                     >
                         Register here
-                    </Link>
+                    </span>
                 </p>
             </div>
         </div>
@@ -92,12 +86,54 @@ const Login = () => {
 };
 
 const styles = {
-    container: { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f4f7f6' },
-    card: { background: 'white', padding: '40px', borderRadius: '12px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', textAlign: 'center', width: '90%', maxWidth: '400px', position: 'relative', zIndex: 1 },
-    errorBox: { backgroundColor: '#ffebee', color: '#c62828', padding: '10px', borderRadius: '5px', marginBottom: '15px', fontSize: '14px', border: '1px solid #ef9a9a' },
-    form: { display: 'flex', flexDirection: 'column', gap: '15px' },
-    input: { padding: '12px 15px', borderRadius: '8px', border: '1px solid #ddd', fontSize: '16px', outlineColor: '#005a32' },
-    button: { padding: '12px', background: '#005a32', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', transition: '0.3s' }
+    container: { 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh', 
+        backgroundColor: '#f4f7f6' 
+    },
+    card: { 
+        background: 'white', 
+        padding: '40px', 
+        borderRadius: '12px', 
+        boxShadow: '0 10px 25px rgba(0,0,0,0.1)', 
+        textAlign: 'center', 
+        width: '90%', 
+        maxWidth: '400px' 
+    },
+    errorBox: { 
+        backgroundColor: '#ffebee', 
+        color: '#c62828', 
+        padding: '10px', 
+        borderRadius: '5px', 
+        marginBottom: '15px', 
+        fontSize: '14px', 
+        border: '1px solid #ef9a9a' 
+    },
+    form: { 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: '15px' 
+    },
+    input: { 
+        padding: '12px 15px', 
+        borderRadius: '8px', 
+        border: '1px solid #ddd', 
+        fontSize: '16px', 
+        outlineColor: '#005a32' 
+    },
+    button: { 
+        padding: '12px', 
+        background: '#005a32', 
+        color: 'white', 
+        border: 'none', 
+        borderRadius: '8px', 
+        cursor: 'pointer', 
+        fontSize: '16px', 
+        fontWeight: 'bold', 
+        transition: '0.3s' 
+    }
 };
 
 export default Login;
