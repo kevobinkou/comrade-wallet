@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Added Link here
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -64,27 +64,19 @@ const Login = () => {
                     </button>
                 </form>
                 
-                {/* Fixed Navigation Section */}
-                <p style={{ marginTop: '25px', fontSize: '14px', color: '#555', position: 'relative', zIndex: 10 }}>
+                <p style={{ marginTop: '25px', fontSize: '14px', color: '#555' }}>
                     Don't have an account?{' '}
-                    <span 
-                        onClick={() => {
-                            console.log("Navigating to register...");
-                            navigate('/register');
-                        }}
+                    <Link 
+                        to="/register" 
                         style={{ 
                             color: '#005a32', 
                             textDecoration: 'underline', 
-                            fontWeight: 'bold', 
-                            cursor: 'pointer',
-                            padding: '12px 8px', // Large touch/click target
-                            display: 'inline-block',
-                            position: 'relative',
-                            zIndex: 20 // Ensures it's above everything else
+                            fontWeight: 'bold',
+                            cursor: 'pointer'
                         }}
                     >
                         Register here
-                    </span>
+                    </Link>
                 </p>
             </div>
         </div>
@@ -106,8 +98,7 @@ const styles = {
         boxShadow: '0 10px 25px rgba(0,0,0,0.1)', 
         textAlign: 'center', 
         width: '90%', 
-        maxWidth: '400px',
-        position: 'relative' // Base for z-index
+        maxWidth: '400px'
     },
     errorBox: { 
         backgroundColor: '#ffebee', 
